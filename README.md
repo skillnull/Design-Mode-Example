@@ -7,7 +7,7 @@
 
 > 参考《大话设计模式》
 
-- [工厂模式(Factory Pattern)](/Example/Facade-Pattern.js)
+- [工厂模式(Factory Pattern)](/Example/Factory-Pattern.js)
 - [策略模式(Strategy Pattern)](/Example/Strategy-Pattern.js)
 - [装饰模式(Decorator Pattern)](/Example/Decorator-Pattern.js)
 - [工厂方法模式(Factory Method Pattern)](/Example/Factory-Method-Pattern.js)
