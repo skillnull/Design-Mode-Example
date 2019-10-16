@@ -4,7 +4,6 @@
 </p>
 
 <h4 align="center"> JavaScript 设计模式样例 </h4>
-<h6 align="center"> 参考《大话设计模式》</h6>
 
 ***
 ##### 创建型模式(Creational Pattern)
