@@ -14,9 +14,11 @@
     目的：工厂模式是为了解耦，把对象的创建和使用的过程分开。
     场景：需要生成复杂对象，需要降低耦合度的场景。
 
-> [工厂方法模式(Factory Method Pattern)](/Example/Factory-Method-Pattern.js)
-
 > [单例模式(Singleton Pattern)](/Example/Singleton-Pattern.js)
+    
+    定义：保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+    目的：阻止其他对象实例化其自己的单例对象的副本，从而确保所有对象都访问唯一实例。
+    场景：如一个系统中可以存在多个打印任务，但是同时只能有一个正在工作的任务。
 
 > [建造者模式(Builder Pattern)](/Example/Builder-Pattern.js)
    
