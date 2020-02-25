@@ -21,6 +21,10 @@
     场景：如一个系统中可以存在多个打印任务，但是同时只能有一个正在工作的任务。
 
 > [建造者模式(Builder Pattern)](/Example/Builder-Pattern.js)
+
+    定义：使用多个简单的对象一步一步构建成一个复杂的对象。
+    目的：将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。
+    场景：一些基本部件不会变，而其组合经常变化的时候。
    
 > [抽象工厂模式(Abstract Factory Pattern)](/Example/Abstract-Factory-Pattern.js)
 
