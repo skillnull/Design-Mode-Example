@@ -27,7 +27,11 @@
     场景：一些基本部件不会变，而其组合经常变化的时候。
    
 > [抽象工厂模式(Abstract Factory Pattern)](/Example/Abstract-Factory-Pattern.js)
-
+    
+    定义：抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。或者说，是其他工厂的工厂。
+    目的：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。
+    场景：系统的产品有多于一个的产品族，而系统只消费其中某一族的产品。
+   
 > [原型模式(Prototype Pattern)](/Example/Prototype-Pattern.js)
 
 ***
