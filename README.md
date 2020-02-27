@@ -33,6 +33,9 @@
    
 > [原型模式(Prototype Pattern)](/Example/Prototype-Pattern.js)
 
+    定义：用于创建重复的对象，同时又能保证性能。
+    目的：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。
+    场景：在运行期建立和删除原型。
 ***
    
 ##### 结构型模式(Structural Pattern)
