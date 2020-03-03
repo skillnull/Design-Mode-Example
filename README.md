@@ -42,6 +42,10 @@
 
 > [适配器模式(Adapter Pattern)](/Example/Adapter-Pattern.js)
 
+    定义：将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。
+    目的：主要解决在软件系统中，常常要将一些"现存的对象"放到新的环境中，而新环境要求的接口是现对象不能满足的。
+    场景：系统需要使用现有的类，而此类的接口不符合系统的需要。
+
 > [桥接模式(Bridge Pattern)](/Example/Bridge-Pattern.js)
 
 > [组合模式(Composite Pattern)](/Example/Composite-Pattern.js)
