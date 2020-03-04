@@ -48,6 +48,10 @@
 
 > [桥接模式(Bridge Pattern)](/Example/Bridge-Pattern.js)
 
+     定义：是用于把抽象化与实现化解耦，使得二者可以独立变化。
+     目的：将抽象部分与实现部分分离，使它们都可以独立的变化。
+     场景：实现系统可能有多个角度分类，每一种角度都可能变化。
+
 > [组合模式(Composite Pattern)](/Example/Composite-Pattern.js)
 
 > [装饰模式(Decorator Pattern)](/Example/Decorator-Pattern.js)
