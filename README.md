@@ -54,6 +54,10 @@
 
 > [组合模式(Composite Pattern)](/Example/Composite-Pattern.js)
 
+     定义：又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。
+     目的：将对象组合成树形结构以表示"部分-整体"的层次结构。
+     场景：您想表示对象的部分-整体层次结构（树形结构）。
+
 > [装饰模式(Decorator Pattern)](/Example/Decorator-Pattern.js)
     
     定义：在不改变原对象的情况下，动态的给对象添加一些额外的职责。就功能而言，装饰模式相比生成子类更为灵活。
