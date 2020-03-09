@@ -73,6 +73,10 @@
 
 > [享元模式(Flyweight Pattern)](/Example/Flyweight-Pattern.js)
 
+    定义：减少创建对象的数量，以减少内存占用和提高性能。
+    目的：用共享技术有效地支持大量细粒度的对象。
+    场景：系统中有大量对象。
+
 ***
 
 ##### 行为模式(Behavioral Pattern)
