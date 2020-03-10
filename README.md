@@ -89,6 +89,10 @@
 
 > [模版方法模式(Template Method Pattern)](/Example/Template-Method-Pattern.js)
 
+    定义：一个抽象类公开定义了执行它的方法的方式/模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。
+    目的：一些方法通用，却在每一个子类都重新写了这一方法。
+    场景：在造房子的时候，地基、走线、水管都一样，只有在建筑的后期才有加壁橱加栅栏等差异。
+
 > [观察者模式(Observer Pattern)](/Example/Observer-Pattern.js)
 
 > [状态模式(State Pattern)](/Example/State-Pattern.js)
