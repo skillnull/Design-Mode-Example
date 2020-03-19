@@ -107,6 +107,10 @@
     
 > [备忘录模式(Memento Pattern)](/Example/Memento-Pattern.js)
 
+    定义：保存一个对象的某个状态，以便在适当的时候恢复对象。
+    目的：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。
+    场景：数据缓存。
+    
 > [迭代器模式(Iterator Pattern)](/Example/Iterator-Pattern.js)
 
 > [命令模式(Command Pattern)](/Example/Command-Pattern.js)
