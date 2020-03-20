@@ -113,6 +113,10 @@
     
 > [迭代器模式(Iterator Pattern)](/Example/Iterator-Pattern.js)
 
+    定义：用于顺序访问集合对象的元素，不需要知道集合对象的底层表示。
+    目的：提供一种方法顺序访问一个聚合对象中各个元素, 而又无须暴露该对象的内部表示。
+    场景：$.each() for..of。
+
 > [命令模式(Command Pattern)](/Example/Command-Pattern.js)
 
 > [职责链模式(Chain of Responsibility Pattern)](/Example/Chain-Of-Responsibility-Pattern.js)
