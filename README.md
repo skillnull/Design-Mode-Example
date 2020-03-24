@@ -119,6 +119,10 @@
 
 > [命令模式(Command Pattern)](/Example/Command-Pattern.js)
 
+    定义：请求以命令的形式包裹在对象中，并传给调用对象。调用对象寻找可以处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。
+    目的：将一个请求封装成一个对象，从而使您可以用不同的请求对客户进行参数化。
+    场景：要对行为进行"记录、撤销/重做、事务"等处理，这种无法抵御变化的紧耦合是不合适的。在这种情况下，如何将"行为请求者"与"行为实现者"解耦？将一组行为抽象为对象，可以实现二者之间的松耦合。
+
 > [职责链模式(Chain of Responsibility Pattern)](/Example/Chain-Of-Responsibility-Pattern.js)
 
 > [中介者模式(Mediator Pattern)](/Example/Memento-Pattern.js)
