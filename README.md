@@ -131,6 +131,10 @@
     
 > [中介者模式(Mediator Pattern)](/Example/Memento-Pattern.js)
 
+    定义：用来降低多个对象和类之间的通信复杂性。
+    目的：用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。
+    场景：MVC框架中的控制器C就是模型M和识图V的中介者。
+
 > [解释器模式(Interpreter Pattern)](/Example/Iterator-Pattern.js)
 
 > [访问者模式(Visitor Pattern)](/Example/Visitor-Pattern.js)
