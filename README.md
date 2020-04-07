@@ -137,4 +137,8 @@
 
 > [解释器模式(Interpreter Pattern)](/Example/Iterator-Pattern.js)
 
+    定义：提供了评估语言的语法或表达式的方式。
+    目的：对于一些固定文法构建一个解释句子的解释器。
+    场景：编译器、运算表达式计算。
+
 > [访问者模式(Visitor Pattern)](/Example/Visitor-Pattern.js)
