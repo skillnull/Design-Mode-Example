@@ -23,7 +23,7 @@ class ShowDialogCommand {
     }
 
     run () {
-        this.receiver.start()
+        this.receiver.show()
     }
 }
 
