@@ -1,42 +1,83 @@
 // 观察者模式(Observer Pattern)
 
 class Subject {
-    constructor () {
-        this.state = 0
-        this.observers = []
+    #state = 0
+    #observers = new Set()
+
+    getState() {
+        return this.#state
     }
 
-    getState () {
-        return this.state
+    setState(state) {
+        if (Object.is(this.#state, state)) {
+            return
+        }
+
+        const previousState = this.#state
+        this.#state = state
+
+        this.notifyAllObservers({
+            previousState,
+            currentState: state
+        })
     }
 
-    setState (state) {
-        this.state = state
-        this.notifyAllObsevers()
+    attach(observer) {
+        if (typeof observer?.update !== 'function') {
+            throw new TypeError('观察者必须提供 update() 方法')
+        }
+
+        this.#observers.add(observer)
+
+        // 返回取消订阅函数
+        return () => {
+            this.detach(observer)
+        }
     }
 
-    attach (observer) {
-        this.observers.push(observer)
+    detach(observer) {
+        return this.#observers.delete(observer)
     }
 
-    notifyAllObsevers () {
-        for (let ele of this.observers.values()) {
-            ele.update()
+    notifyAllObservers(change) {
+        // 使用快照，避免通知期间修改集合影响当前遍历
+        const observers = [...this.#observers]
+
+        for (const observer of observers) {
+            observer.update(this, change)
         }
     }
 }
 
+
+// 观察者：
 class Observer {
-    constructor (name, subject) {
+    constructor(name, subject) {
         this.name = name
-        this.subject = subject
-        this.subject.attach(this)
+
+        this.unsubscribe = subject.attach(this)
     }
-    update () {
-        console.log(this.name,this.subject.getState())
+
+    update(subject, change) {
+        console.log(
+            `${this.name}：`,
+            change.previousState,
+            '→',
+            change.currentState
+        )
+
+        console.log('当前状态：', subject.getState())
+    }
+
+    dispose() {
+        this.unsubscribe()
     }
 }
 
-let subject = new Subject()
-let observer = new Observer('observer 1', subject)
+// 使用：
+const subject = new Subject()
+
+const observer1 = new Observer('observer 1', subject)
+const observer2 = new Observer('observer 2', subject)
+
 subject.setState('hahaha')
