@@ -1,48 +1,72 @@
 // 享元模式(Flyweight Pattern)
 
-// 构建享元对象
-class Modal {
-    constructor (id, gender) {
+// 享元对象：只保存可共享的内部状态
+class Model {
+    constructor(gender) {
         this.gender = gender
-        this.name = `${gender}${id}`
+        Object.freeze(this)
+    }
+
+    takePhoto({ name, clothes }) {
+        console.log(
+            `${this.gender}模${name}穿${clothes}拍了照`
+        )
     }
 }
 
-// 构建享元工厂
-class ModalFactory {
-    // 单例模式
-    static create (id, gender) {
-        if (this[gender]) {
-            return this[gender]
+// 享元工厂
+class ModelFactory {
+    static #models = new Map()
+
+    static getModel(gender) {
+        if (!this.#models.has(gender)) {
+            this.#models.set(gender, new Model(gender))
         }
-        return this[gender] = new Modal(id, gender)
+
+        return this.#models.get(gender)
+    }
+
+    static getCount() {
+        return this.#models.size
     }
 }
 
-// 管理外部状态
-class TakeClothersManager {
-    // 添加衣服款式
-    static addClothes (id, gender, clothes) {
-        const modal = ModalFactory.create(id, gender)
-        this[id] = {
+// 外部状态管理器
+class ClothingShootManager {
+    static #records = new Map()
+
+    static addClothes(id, gender, clothes) {
+        this.#records.set(id, {
+            id,
+            name: `${gender}${id}`,
             clothes,
-            modal
-        }
+            model: ModelFactory.getModel(gender)
+        })
     }
 
-    // 拍照
-    static takePhoto (id) {
-        const obj = this[id]
-        console.log(`${obj.modal.gender}模${obj.modal.name}穿${obj.clothes}拍了照`)
+    static takePhoto(id) {
+        const record = this.#records.get(id)
+
+        if (!record) {
+            throw new Error(`不存在编号为 ${id} 的拍摄记录`)
+        }
+
+        record.model.takePhoto({
+            name: record.name,
+            clothes: record.clothes
+        })
     }
 }
+
 
 for (let i = 0; i < 10; i++) {
-    TakeClothersManager.addClothes(i, '男', `服装${i}`)
-    TakeClothersManager.takePhoto(i)
+    ClothingShootManager.addClothes(i, '男', `服装${i}`)
+    ClothingShootManager.takePhoto(i)
 }
 
 for (let i = 10; i < 20; i++) {
-    TakeClothersManager.addClothes(i, '女', `服装${i}`)
-    TakeClothersManager.takePhoto(i)
+    ClothingShootManager.addClothes(i, '女', `服装${i}`)
+    ClothingShootManager.takePhoto(i)
 }
+
+console.log(ModelFactory.getCount()) // 2
