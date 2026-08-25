@@ -1,46 +1,43 @@
 // 抽象工厂模式(Abstract Factory Pattern)
 
 class User {
-    constructor (type) {
+    constructor(type, name) {
         if (new.target === User) {
             throw new Error('抽象类不能实例化！')
         }
+
         this.type = type
+        this.name = name
+        this.viewPage = ['首页', '通讯录', '发现页']
     }
 }
 
 class UserOfWechat extends User {
-    constructor (name) {
-        super('wechat')
-        this.name = name
-        this.viewPage = ['首页', '通讯录', '发现页']
+    constructor(name) {
+        super('wechat', name)
     }
 }
 
 class UserOfQQ extends User {
-    constructor (name) {
-        super('qq')
-        this.name = name
-        this.viewPage = ['首页', '通讯录', '发现页']
+    constructor(name) {
+        super('qq', name)
     }
 }
 
-function getUser (type) {
-    switch (type) {
-        case 'wechat':
-            return UserOfWechat
-            break
-        case 'qq':
-            return UserOfQQ
-            break
-        default:
-            throw new Error('参数错误')
-            break
-    }
+const userClasses = {
+    wechat: UserOfWechat,
+    qq: UserOfQQ
 }
 
-let WechatUserClass = getUser('wechat')
-let QQUserClass = getUser('qq')
+function getUserClass(type) {
+    const UserClass = userClasses[type]
 
-let wechatUser = new WechatUserClass('卡卡罗特')
-let qqUser = new QQUserClass('贝吉塔')
+    if (!UserClass) {
+        throw new Error(`不支持的用户类型：${type}`)
+    }
+
+    return UserClass
+}
+
+const WechatUserClass = getUserClass('wechat')
+const wechatUser = new WechatUserClass('卡卡罗特')
