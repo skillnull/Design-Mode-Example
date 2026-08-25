@@ -22,4 +22,4 @@ function callStratery (strategyType, number1, number2) {
 }
 
 // 策略算法调用
-callStratery(add, 1, 2) // return 3
+callStratery('add', 1, 2) // return 3
