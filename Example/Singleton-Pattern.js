@@ -1,26 +1,46 @@
 // 单例模式(Singleton Pattern)
 
 // 惰性单例
-let lazySingle = (() => {
-    let _instance = null
-    // 单例
-    Single = () => {
+const getSingleton = (() => {
+    let instance = null
+
+    function createInstance() {
         let privateAttribute = '我是私有属性'
-        privateMethod = () => {
-            // 私有方法
+
+        function privateMethod() {
+            return `读取：${privateAttribute}`
         }
+
         return {
-            publicMethod: () => {
-                // 对外暴露方法
+            publicAttribute: '我是对外暴露属性',
+
+            publicMethod() {
+                return privateMethod()
             },
-            publicAttribute: '我是对外暴露属性'
+
+            setPrivateAttribute(value) {
+                privateAttribute = value
+            }
         }
     }
-    // 提供一个全局访问点
-    return () => {
-        if (!_instance) {
-            _instance = Single()
+
+    return function () {
+        if (instance === null) {
+            instance = createInstance()
         }
-        return _instance
+
+        return instance
     }
 })()
+
+// 使用
+
+const instance1 = getSingleton()
+const instance2 = getSingleton()
+
+console.log(instance1 === instance2) // true
+// 读取：我是私有属性
+console.log(instance1.publicMethod())
+instance1.setPrivateAttribute('修改后的私有属性')
+// 读取：修改后的私有属性
+console.log(instance2.publicMethod())
