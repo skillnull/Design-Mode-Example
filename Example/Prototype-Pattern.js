@@ -1,23 +1,27 @@
 // 原型模式(Prototype Pattern)
 
-let productPrototype = {
-    init: (type) => {
+const productPrototype = {
+    init(type) {
         this.type = type
+        return this
     },
-    getType: () => {
+
+    getType() {
         return this.type
     }
 }
-let prototype = (type) => {
-    function F () {
-    }
+
+function createProduct(type) {
+    function F() {}
 
     F.prototype = productPrototype
-    let f = new F()
-    f.init(type)
-    return f
+
+    const product = new F()
+    product.init(type)
+
+    return product
 }
 
+const car = createProduct('丰田CHR')
 
-let car = prototype('丰田CHR')
-console.log(car.getType())
+console.log(car.getType()) // 丰田CHR
