@@ -1,27 +1,42 @@
 // 适配器模式(Adapter Pattern)
-
 class Target {
-    small () {
-        throw new Error('Please overwritten function!')
+    constructor() {
+        if (new.target === Target) {
+            throw new Error('Target 是抽象类，不能直接实例化')
+        }
+    }
+
+    small() {
+        throw new Error('子类必须实现 small() 方法')
     }
 }
 
-class newTarget {
-    big () {
-        console.log('新的适配')
+class Adaptee {
+    big() {
+        console.log('执行新的接口')
+        return '执行成功'
     }
 }
 
 class Adapter extends Target {
-    constructor (newTarget) {
+    constructor(adaptee) {
         super()
-        this.newTarget = newTarget
+
+        if (typeof adaptee?.big !== 'function') {
+            throw new TypeError('被适配对象必须提供 big() 方法')
+        }
+
+        this.adaptee = adaptee
     }
-    small () {
-        this.newTarget.big()
+
+    small() {
+        return this.adaptee.big()
     }
 }
 
-let NT = new newTarget()
-let AD = new Adapter(NT)
-AD.small()
+const adaptee = new Adaptee()
+const target = new Adapter(adaptee)
+
+const result = target.small()
+
+console.log(result) // 执行成功
