@@ -1,76 +1,40 @@
 // 职责链模式(Chain of Responsibility Pattern)
 
-// 采购请求
-let PurchaseRequest = (amount, productName) => {
-    this.amount = amount
-    this.productName = productName
-}
+class Approver {
+    constructor(name, limit) {
+        this.name = name
+        this.limit = limit
+        this.next = null
+    }
 
-// 处理方
-let Approver = (name, nextApprover) => {
-    this.name = name
-    this.nextApprover = nextApprover
-}
+    processRequest(request) {
+        // 自己能处理，就处理并结束
+        if (request.amount < this.limit) {
+            console.log(`${this.name}批准采购：${request.productName}`)
+            return
+        }
 
-Approver.prototype.processRequest = () => {
-    throw new Error()
-}
+        // 自己不能处理，交给下一级
+        if (this.next) {
+            return this.next.processRequest(request)
+        }
 
-// ConcreteHandler
-let Manager = (name, nextApprover) => {
-    Approver.call(this, name, nextApprover)
-}
-extend(Manager, Approver)
-Manager.prototype.processRequest = (request) => {
-    if (request.Amount < 10000.0) {
-        console.log('ok')
-    } else if (NextApprover != null) {
-        this.nextApprover.ProcessRequest(request)
+        // 已经到达链尾，仍然无法处理
+        console.log(`采购金额超出审批权限：${request.productName}`)
     }
 }
 
+// 创建审批者
+const manager = new Approver('经理', 10000)
+const vicePresident = new Approver('副总', 25000)
+const president = new Approver('总经理', 100000)
 
-// ConcreteHandler,副总
-let VicePresident = function (name, nextApprover) {
-    Approver.call(this, name, nextApprover)
-}
-extend(VicePresident, Approver);
-VicePresident.prototype.processRequest = function (request) {
-    if (request.Amount < 25000.0) {
-        console.log('ok');
-    } else if (NextApprover != null) {
-        this.nextApprover.ProcessRequest(request)
-    }
-}
+// 连接职责链：经理 → 副总 → 总经理
+manager.next = vicePresident
+vicePresident.next = president
 
-
-// ConcreteHandler，总经理
-let President = function (name, nextApprover) {
-    Approver.call(this, name, nextApprover)
-}
-extend(President, Approver)
-President.prototype.processRequest = function (request) {
-    if (request.Amount < 100000.0) {
-        console.log('ok')
-    } else if (NextApprover != null) {
-        this.nextApprover.ProcessRequest(request)
-    }
-}
-
-
-let requestTelphone = new PurchaseRequest(4000.0, "Telphone")
-let requestSoftware = new PurchaseRequest(10000.0, "Visual Studio")
-let requestComputers = new PurchaseRequest(40000.0, "Computers")
-
-let manager = new Manager("LearningHard")
-let Vp = new VicePresident("Tony")
-let Pre = new President("BossTom")
-
-// 设置责任链
-manager.NextApprover = Vp
-Vp.NextApprover = Pre
-
-// 处理请求
-manager.ProcessRequest(requestTelphone)
-manager.ProcessRequest(requestSoftware)
-manager.ProcessRequest(requestComputers)
+// 所有请求都从链头提交
+manager.processRequest({ amount: 4000, productName: '电话' })
+manager.processRequest({ amount: 10000, productName: '软件' })
+manager.processRequest({ amount: 40000, productName: '电脑' })
+manager.processRequest({ amount: 200000, productName: '服务器' })
