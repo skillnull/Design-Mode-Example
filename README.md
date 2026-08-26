@@ -135,7 +135,7 @@
     目的：用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。
     场景：MVC框架中的控制器C就是模型M和识图V的中介者。
 
-> [解释器模式(Interpreter Pattern)](/Example/Iterator-Pattern.js)
+> [解释器模式(Interpreter Pattern)](/Example/Interpreter-Pattern.js)
 
     定义：提供了评估语言的语法或表达式的方式。
     目的：对于一些固定文法构建一个解释句子的解释器。
