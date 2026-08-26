@@ -1,55 +1,53 @@
 // 解释器模式(Interpreter Pattern)
 
-// 定义对于语法的断言
-class TerminalExpression {
-    constructor (data) {
-        this.data = data
+// 基础表达式：判断是否包含关键词
+class Keyword {
+    constructor(word) {
+        this.word = word
     }
 
-    interpret (context) {
-        if (context.indexOf(this.data) > -1) {
-            return true
-        }
-        return false
-    }
-}
-
-// 添加表达式判断符
-class OrExpression {
-    constructor(expr1, expr2) {
-        this.expr1 = expr1;
-        this.expr2 = expr2;
-    }
     interpret(context) {
-        return this.expr1.interpret(context) || this.expr2.interpret(context);
+        return context.includes(this.word)
     }
 }
-class AndExpression {
-    constructor(expr1, expr2) {
-        this.expr1 = expr1;
-        this.expr2 = expr2;
+
+// 或表达式：满足任意一个条件
+class Or {
+    constructor(left, right) {
+        this.left = left
+        this.right = right
     }
+
     interpret(context) {
-        return this.expr1.interpret(context) && this.expr2.interpret(context);
+        return this.left.interpret(context) ||
+               this.right.interpret(context)
     }
 }
 
+// 与表达式：必须同时满足两个条件
+class And {
+    constructor(left, right) {
+        this.left = left
+        this.right = right
+    }
 
-// 获取对应表达式
-function getMaleExpression(){
-    const robert = new TerminalExpression("Robert");
-    const john = new TerminalExpression("John");
-    return new OrExpression(robert, john);
+    interpret(context) {
+        return this.left.interpret(context) &&
+               this.right.interpret(context)
+    }
 }
-function getMarriedWomanExpression(){
-    const julie = new TerminalExpression("Julie");
-    const married = new TerminalExpression("Married");
-    return new AndExpression(julie, married);
-}
 
+// 构建规则：(John OR Robert) AND Married
+const rule = new And(
+    new Or(
+        new Keyword('John'),
+        new Keyword('Robert')
+    ),
+    new Keyword('Married')
+)
 
-// 判断语句断言
-const isMale = getMaleExpression();
-const isMarriedWoman = getMarriedWomanExpression();
-console.log("John is male? " + isMale.interpret("John"));
-console.log("Julie is a married women? " )
+// 解释输入，得到结果
+console.log(rule.interpret('John Married'))   // true
+console.log(rule.interpret('Robert Married')) // true
+console.log(rule.interpret('John'))           // false
+console.log(rule.interpret('Julie Married'))  // false
