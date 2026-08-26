@@ -1,42 +1,31 @@
 // 命令模式(Command Pattern)
 
-let dialog = {
-    show () {
-        console.log('show a dialog')
+// 1. 接收者：真正做事
+const light = {
+    turnOn() {
+        console.log('灯亮了')
     }
 }
 
-let animation = {
-    start () {
-        console.log('show animation')
-    }
-}
-let setCommand = (btn, cmd) => {
-    btn.onclick = () => {
-        cmd.run()
-    }
-}
-
-class ShowDialogCommand {
-    constructor (receiver) {
-        this.receiver = receiver
+// 2. 命令：封装“让这盏灯打开”的请求
+class TurnOnCommand {
+    constructor(light) {
+        this.light = light
     }
 
-    run () {
-        this.receiver.show()
+    execute() {
+        this.light.turnOn()
     }
 }
 
-class StartAnimationCommand {
-    constructor (receiver) {
-        this.receiver = receiver
-    }
-
-    run () {
-        this.receiver.start()
+// 3. 调用者：只负责执行命令
+const remote = {
+    press(command) {
+        command.execute()
     }
 }
 
+// 使用
+const command = new TurnOnCommand(light)
 
-setCommand(btn1, new ShowDialogCommand(dialog))
-setCommand(btn2, new StartAnimationCommand(animation))
+remote.press(command) // 灯亮了
